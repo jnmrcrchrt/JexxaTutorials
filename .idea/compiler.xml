@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AjcSettings">
+    <option name="ajcPath" value="$PROJECT_DIR$/../../../../SEUIDE/software/aspectj-1.9/lib/aspectjtools.jar" />
+    <option name="delegateToJavac" value="true" />
+  </component>
+  <component name="CompilerConfiguration">
+    <option name="BUILD_PROCESS_HEAP_SIZE" value="2000" />
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="jexxa-adapter-api" />
+        <module name="hellojexxa" />
+        <module name="JexxaTutorials" />
+        <module name="bookstore" />
+        <module name="jexxa-core" />
+        <module name="timeservice" />
+        <module name="bookstorej" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="bookstore" options="-Xlint:all" />
+      <module name="bookstorej" options="-Xlint:all" />
+      <module name="hellojexxa" options="-Xlint:all" />
+      <module name="jexxa-adapter-api" options="-Xlint:all" />
+      <module name="jexxa-core" options="-Xlint:all" />
+      <module name="timeservice" options="-Xlint:all" />
+    </option>
+  </component>
+</project>

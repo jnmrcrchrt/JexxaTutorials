@@ -1,0 +1,9 @@
+# Project exclude paths
+/jexxa-adapter-api/target/
+/jexxa-core/target/
+/target/
+/tutorials/BookStore/target/
+/tutorials/BookStoreJ/target/
+/tutorials/HelloJexxa/target/
+/tutorials/target/
+/tutorials/TimeService/target/
