@@ -13,16 +13,17 @@
         <outputRelativeToContentRoot value="true" />
         <module name="jexxa-adapter-api" />
         <module name="hellojexxa" />
-        <module name="JexxaTutorials" />
         <module name="bookstore" />
         <module name="jexxa-core" />
         <module name="timeservice" />
         <module name="bookstorej" />
+        <module name="KafkaApp" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="KafkaApp" options="-Xlint:all" />
       <module name="bookstore" options="-Xlint:all" />
       <module name="bookstorej" options="-Xlint:all" />
       <module name="hellojexxa" options="-Xlint:all" />

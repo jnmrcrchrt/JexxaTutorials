@@ -4,12 +4,16 @@
     <file url="file://$PROJECT_DIR$/jexxa-adapter-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jexxa-core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jexxa-core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tutorials/BookStore/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tutorials/BookStore/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tutorials/BookStoreJ/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tutorials/BookStoreJ/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tutorials/HelloJexxa/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tutorials/HelloJexxa/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tutorials/KafkaApp/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tutorials/KafkaApp/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tutorials/TimeService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tutorials/TimeService/src/main/resources" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />

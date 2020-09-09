@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/jexxa-core/pom.xml" />
         <option value="$PROJECT_DIR$/jexxa-adapter-api/pom.xml" />
         <option value="$PROJECT_DIR$/tutorials/pom.xml" />
+        <option value="$PROJECT_DIR$/tutorials/KafkaApp/pom.xml" />
       </list>
     </option>
   </component>
