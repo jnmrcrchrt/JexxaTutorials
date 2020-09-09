@@ -87,5 +87,6 @@
     <module>TimeService</module>
     <module>BookStore</module>
     <module>BookStoreJ</module>
+    <module>KafkaApp</module>
   </modules>
 </project>

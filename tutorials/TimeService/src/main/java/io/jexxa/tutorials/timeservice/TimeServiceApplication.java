@@ -18,6 +18,7 @@ public final class TimeServiceApplication
     //Declare the packages that should be used by Jexxa
     private static final String JMS_DRIVEN_ADAPTER      = TimeServiceApplication.class.getPackageName() + ".infrastructure.drivenadapter.messaging";
     private static final String CONSOLE_DRIVEN_ADAPTER  = TimeServiceApplication.class.getPackageName() + ".infrastructure.drivenadapter.console";
+    private static final String DISPLAY_DRIVEN_ADAPTER  = TimeServiceApplication.class.getPackageName() + ".infrastructure.drivenadapter.display";
     private static final String OUTBOUND_PORTS          = TimeServiceApplication.class.getPackageName() + ".domainservice";
 
     public static void main(String[] args)
@@ -27,18 +28,21 @@ public final class TimeServiceApplication
         jexxaMain
                 //Define which outbound ports should be managed by Jexxa
                 .addToApplicationCore(OUTBOUND_PORTS)
+
                 //Define the driving adapter that should which implementation of the outbound port should be used by Jexxa.
                 //Note: We must only register a single driven adapter for the outbound port
-                .addToInfrastructure(getDrivenAdapter(args));
+                .addToInfrastructure(getDrivenAdapter(args))
+                .addToInfrastructure(DISPLAY_DRIVEN_ADAPTER);
 
-                // If JMS is enabled bind 'JMSAdapter' to our application 
-                // Note: Jexxa's JMSAdapter is a so called specific driving adapter which cannot be directly connected directly
-                // to an inbound port because we cannot apply any convention. In this case bind Jexxa's specific driving adapter
-                // 'JMSAdapter' to an application specific DrivingAdapter which is `PublishTimeListener`
-                if ( isJMSEnabled(args) )
-                {
-                    jexxaMain.bind(JMSAdapter.class).to(PublishTimeListener.class);
-                }
+
+        // If JMS is enabled bind 'JMSAdapter' to our application
+        // Note: Jexxa's JMSAdapter is a so called specific driving adapter which cannot be directly connected directly
+        // to an inbound port because we cannot apply any convention. In this case bind Jexxa's specific driving adapter
+        // 'JMSAdapter' to an application specific DrivingAdapter which is `PublishTimeListener`
+        if ( isJMSEnabled(args) )
+        {
+            jexxaMain.bind(JMSAdapter.class).to(PublishTimeListener.class);
+        }
 
 
         //The rest of main is similar to tutorial HelloJexxa
@@ -48,7 +52,6 @@ public final class TimeServiceApplication
                 .bind(JMXAdapter.class).to(TimeService.class)
 
                 .bind(JMXAdapter.class).to(jexxaMain.getBoundedContext())
-                .bind(RESTfulRPCAdapter.class).to(jexxaMain.getBoundedContext())
 
                 .start()
 
@@ -91,6 +94,6 @@ public final class TimeServiceApplication
 
     private TimeServiceApplication()
     {
-        //Private constructor since we only offer main 
+        //Private constructor since we only offer main
     }
 }
