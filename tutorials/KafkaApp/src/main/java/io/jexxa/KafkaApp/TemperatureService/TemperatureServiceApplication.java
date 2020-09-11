@@ -3,13 +3,14 @@ package io.jexxa.KafkaApp.TemperatureService;
 import io.jexxa.KafkaApp.TemperatureService.applicationservice.TemperatureService;
 import io.jexxa.core.JexxaMain;
 import io.jexxa.infrastructure.drivingadapter.jmx.JMXAdapter;
+import io.jexxa.infrastructure.drivingadapter.kafka.KafkaAdapter;
 import io.jexxa.infrastructure.drivingadapter.messaging.JMSAdapter;
 import io.jexxa.infrastructure.drivingadapter.rest.RESTfulRPCAdapter;
 
 public final class TemperatureServiceApplication
 {
     //Declare the packages that should be used by Jexxa
-    private static final String KAFKA_DRIVEN_ADAPTER      = TemperatureServiceApplication.class.getPackageName() + ".infrastructure.drivingadapter.kafka";
+    private static final String KAFKA_DRIVEN_ADAPTER      = TemperatureServiceApplication.class.getPackageName() + "infrastructure.drivenadapter.kafka";
     private static final String OUTBOUND_PORTS            = TemperatureServiceApplication.class.getPackageName() + ".domainservice";
 
 
@@ -26,13 +27,16 @@ public final class TemperatureServiceApplication
                 .addToInfrastructure(KAFKA_DRIVEN_ADAPTER);
 
 
+        //jexxaMain.bind(KafkaAdapter.class).to(TemperatureService.class);
 
         //The rest of main is similar to tutorial HelloJexxa
         jexxaMain
                 // Bind RESTfulRPCAdapter and JMXAdapter to TimeService class so that we can invoke its method
-                .bind(RESTfulRPCAdapter.class).to(TemperatureService.class)
+                //.bind(RESTfulRPCAdapter.class).to(TemperatureService.class)
 
-                .bind(JMXAdapter.class).to(jexxaMain.getBoundedContext())
+                //.bind(KafkaAdapter.class).to(TemperatureService.class)
+
+                //.bind(JMXAdapter.class).to(jexxaMain.getBoundedContext())
 
                 .start()
 
