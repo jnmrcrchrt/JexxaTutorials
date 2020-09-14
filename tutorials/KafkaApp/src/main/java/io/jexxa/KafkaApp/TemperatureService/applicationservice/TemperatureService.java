@@ -19,7 +19,7 @@ public class TemperatureService
 
     public void displayPublishedTemp(String Temp)
     {
-        iMessageDisplay.show("Hier muss die Temp stehen");
+        iMessageDisplay.show(Temp);
     }
 
 }

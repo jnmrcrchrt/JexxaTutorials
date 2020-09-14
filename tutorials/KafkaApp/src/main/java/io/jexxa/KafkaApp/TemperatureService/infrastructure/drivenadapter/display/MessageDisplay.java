@@ -1,4 +1,4 @@
-package io.jexxa.KafkaApp.TemperatureService.infrastructure.drivenadapter.kafka;
+package io.jexxa.KafkaApp.TemperatureService.infrastructure.drivenadapter.display;
 
 import io.jexxa.KafkaApp.TemperatureService.domainservice.IMessageDisplay;
 import io.jexxa.utils.JexxaLogger;
