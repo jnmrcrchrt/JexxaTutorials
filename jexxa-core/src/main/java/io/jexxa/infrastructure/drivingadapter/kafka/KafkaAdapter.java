@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Properties;
 
 
-import io.jexxa.infrastructure.drivingadapter.messaging.JMSConfiguration;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -18,7 +17,7 @@ import io.jexxa.infrastructure.drivingadapter.IDrivingAdapter;
 public class KafkaAdapter implements  IDrivingAdapter
 {
 
-    public static final String BOOSTRAP_SERVER_KEY = "io.jexxa.kafka.broker";
+    public static final String BOOTSTRAP_SERVER_KEY = "io.jexxa.kafka.broker";
     //public static final String AUTO_COMMIT = "false";   //Publizieren des Offsets
     public static final String GROUP_ID_KEY ="io.jexxa.kafka.group";
 
@@ -29,29 +28,30 @@ public class KafkaAdapter implements  IDrivingAdapter
     private final List<Object> registeredConsumer = new ArrayList<>();
 
     private final Properties properties;
-    private KafkaConsumer consumer;
+    private KafkaConsumer<String,String> consumer;
+
+
 
     public KafkaAdapter(final Properties properties)
     {
 
-        //In Properties?
-
         //properties.put("enable.auto.commit", AUTO_COMMIT);
 
-        properties.put("bootstrap.server", BOOSTRAP_SERVER_KEY);
-        properties.put("key.deserializer", KEY_DESERIALIZER);
-        properties.put("value.deserializer", VALUE_DESERIALIZER);
-        properties.put("group.id", GROUP_ID_KEY);       //Wert für Client?
+        properties.put("bootstrap.server","localhost:9092");
+        properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        properties.put("group.id", "group");       //Wert für Client?
 
         this.properties = properties;
 
         createConsumer();
 
+
     }
 
     private void createConsumer()
     {
-        consumer = new KafkaConsumer(properties);
+        consumer = new KafkaConsumer<>(properties);
     }
 
 
@@ -59,19 +59,16 @@ public class KafkaAdapter implements  IDrivingAdapter
     public void register(Object object)
     {
 
-        //Wie dynmaisch Properties zuordnen
+        //Wie dynamisch Properties zuordnen
 
-        consumer = (KafkaConsumer) object;
+        IKafkaPublishRecord kafkaPort = (IKafkaPublishRecord) object;
         KafkaConfiguration kafkaConfiguration  = getConfiguration(object);
 
-        properties.put("auto.offset.reset",kafkaConfiguration.receiveFrom());
+        //properties.put("auto.offset.reset",kafkaConfiguration.receiveFrom());
 
-        //kafkaConsumer.subscribe(Arrays.asList(kafkaConfiguration.topic()));
-        consumer.subscribe(Arrays.asList("H5_000T3001T_AAL_PV"));
+        consumer.subscribe(Arrays.asList(kafkaConfiguration.topic()));
 
-
-        //Polling
-        //onRecord(consumer);
+        Polling(kafkaPort);
 
         registeredConsumer.add(consumer);
 
@@ -79,15 +76,24 @@ public class KafkaAdapter implements  IDrivingAdapter
 
 
 
-    public void onRecord(KafkaConsumer kafkaConsumer)
+
+    public void Polling(IKafkaPublishRecord kafkaPort)
     {
-        while(true){
-            ConsumerRecords<String,String> records = kafkaConsumer.poll(Duration.ofMillis(1000));
 
-            for (ConsumerRecord<String,String> record : records){
-      
+        synchronized (IDrivingAdapter.acquireLock().getSynchronizationObject())
+        {
+
+            while (true)
+            {
+
+                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
+
+                for (ConsumerRecord<String, String> record : records)
+                {
+                    kafkaPort.onRecord(record);
+                }
+
             }
-
         }
     }
 
