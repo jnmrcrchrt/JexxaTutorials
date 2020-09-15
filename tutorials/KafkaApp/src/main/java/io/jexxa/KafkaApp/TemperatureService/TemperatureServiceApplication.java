@@ -35,10 +35,9 @@ public final class TemperatureServiceApplication
                 // Bind RESTfulRPCAdapter and JMXAdapter to TimeService class so that we can invoke its method
                // .bind(RESTfulRPCAdapter.class).to(TemperatureService.class)
 
-                //.bind(KafkaAdapter.class).to(TemperatureService.class)
+                .bind(KafkaAdapter.class).to(TemperatureService.class)
 
                 //.bind(JMXAdapter.class).to(jexxaMain.getBoundedContext())
-                //.bind(KafkaAdapter.class).to(TemperatureService.class)
 
                 .start()
 

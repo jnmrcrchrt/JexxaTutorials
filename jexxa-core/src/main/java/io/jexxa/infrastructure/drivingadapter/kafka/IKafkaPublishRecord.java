@@ -4,5 +4,5 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 public interface IKafkaPublishRecord
 {
-    void onRecord(ConsumerRecord record);
+    void onRecord(ConsumerRecord<String,String> record);
 }

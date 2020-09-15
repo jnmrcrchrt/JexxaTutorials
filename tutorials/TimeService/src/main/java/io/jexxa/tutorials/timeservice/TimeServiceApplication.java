@@ -32,7 +32,7 @@ public final class TimeServiceApplication
                 //Define the driving adapter that should which implementation of the outbound port should be used by Jexxa.
                 //Note: We must only register a single driven adapter for the outbound port
                 .addToInfrastructure(getDrivenAdapter(args))
-                .addToInfrastructure(DISPLAY_DRIVEN_ADAPTER);
+                .addToInfrastructure(DISPLAY_DRIVEN_ADAPTER);    //brauch Instanz aus diesem Package, sucht Interface und gibt es dem ApplicationService
 
 
         // If JMS is enabled bind 'JMSAdapter' to our application
@@ -48,10 +48,10 @@ public final class TimeServiceApplication
         //The rest of main is similar to tutorial HelloJexxa
         jexxaMain
                 // Bind RESTfulRPCAdapter and JMXAdapter to TimeService class so that we can invoke its method
-                .bind(RESTfulRPCAdapter.class).to(TimeService.class)
-                .bind(JMXAdapter.class).to(TimeService.class)
+                //.bind(RESTfulRPCAdapter.class).to(TimeService.class)
+                //.bind(JMXAdapter.class).to(TimeService.class)
 
-                .bind(JMXAdapter.class).to(jexxaMain.getBoundedContext())
+                //.bind(JMXAdapter.class).to(jexxaMain.getBoundedContext())
 
                 .start()
 

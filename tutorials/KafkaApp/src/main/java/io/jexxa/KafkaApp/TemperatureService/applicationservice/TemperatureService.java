@@ -3,6 +3,7 @@ package io.jexxa.KafkaApp.TemperatureService.applicationservice;
 import io.jexxa.KafkaApp.TemperatureService.domainservice.IMessageDisplay;
 import io.jexxa.KafkaApp.TemperatureService.domainservice.ITemperatureListener;
 
+@SuppressWarnings("unused")
 public class TemperatureService
 {
 

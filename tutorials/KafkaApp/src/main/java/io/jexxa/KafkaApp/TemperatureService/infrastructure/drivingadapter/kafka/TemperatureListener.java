@@ -1,21 +1,9 @@
 package io.jexxa.KafkaApp.TemperatureService.infrastructure.drivingadapter.kafka;
 
-import java.time.Duration;
-import java.time.LocalTime;
-
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.TextMessage;
-
-import com.google.gson.Gson;
 import io.jexxa.KafkaApp.TemperatureService.applicationservice.TemperatureService;
 import io.jexxa.infrastructure.drivingadapter.kafka.IKafkaPublishRecord;
 import io.jexxa.infrastructure.drivingadapter.kafka.KafkaConfiguration;
-import io.jexxa.infrastructure.drivingadapter.messaging.JMSConfiguration;
-import io.jexxa.utils.JexxaLogger;
-import org.apache.kafka.clients.KafkaClient;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
 
 public class TemperatureListener implements IKafkaPublishRecord
 {
@@ -30,8 +18,8 @@ public class TemperatureListener implements IKafkaPublishRecord
     }
 
     @Override
-    @KafkaConfiguration(topic = TOPIC, receiveFrom = "earliest")
-    public void onRecord(ConsumerRecord record)
+    @KafkaConfiguration(topic = TOPIC)
+    public void onRecord(ConsumerRecord<String,String> record)
     {
             //Hier muss nur noch der Wert ankommen der aus der Topic gelesen wird
             // Forward this information to corresponding application service.

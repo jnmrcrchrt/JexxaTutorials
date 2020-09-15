@@ -25,7 +25,8 @@ public class KafkaAdapter implements  IDrivingAdapter
     public static final String KEY_DESERIALIZER = "org.apache.kafka.common.serialization.StringDeserializer";
     public static final String VALUE_DESERIALIZER = "org.apache.kafka.common.serialization.StringDeserializer";
 
-    private final List<Object> registeredConsumer = new ArrayList<>();
+    private final List<KafkaConsumer> registeredConsumer = new ArrayList<>();
+    private final List<Object> publisher = new ArrayList<>();
 
     private final Properties properties;
     private KafkaConsumer<String,String> consumer;
@@ -34,6 +35,8 @@ public class KafkaAdapter implements  IDrivingAdapter
 
     public KafkaAdapter(final Properties properties)
     {
+
+        //In Properties?
 
         //properties.put("enable.auto.commit", AUTO_COMMIT);
 
@@ -51,7 +54,7 @@ public class KafkaAdapter implements  IDrivingAdapter
 
     private void createConsumer()
     {
-        consumer = new KafkaConsumer<>(properties);
+        consumer = new KafkaConsumer<String,String>(properties);
     }
 
 
@@ -61,16 +64,18 @@ public class KafkaAdapter implements  IDrivingAdapter
 
         //Wie dynamisch Properties zuordnen
 
-        IKafkaPublishRecord kafkaPort = (IKafkaPublishRecord) object;
+        IKafkaPublishRecord kafkaPort = (IKafkaPublishRecord) (object);
         KafkaConfiguration kafkaConfiguration  = getConfiguration(object);
 
         //properties.put("auto.offset.reset",kafkaConfiguration.receiveFrom());
+
 
         consumer.subscribe(Arrays.asList(kafkaConfiguration.topic()));
 
         Polling(kafkaPort);
 
         registeredConsumer.add(consumer);
+        publisher.add(kafkaPort);
 
     }
 
@@ -85,7 +90,6 @@ public class KafkaAdapter implements  IDrivingAdapter
 
             while (true)
             {
-
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
 
                 for (ConsumerRecord<String, String> record : records)
@@ -110,6 +114,7 @@ public class KafkaAdapter implements  IDrivingAdapter
     public void stop(){
 
         //close(); Schließe alle Consumer
+        consumer.close();
         registeredConsumer.clear();
     }
 
