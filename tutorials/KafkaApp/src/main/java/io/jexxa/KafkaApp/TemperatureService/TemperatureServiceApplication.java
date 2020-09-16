@@ -11,12 +11,15 @@ import io.jexxa.infrastructure.drivingadapter.rest.RESTfulRPCAdapter;
 public final class TemperatureServiceApplication
 {
     //Declare the packages that should be used by Jexxa
-    private static final String DISPLAY_DRIVEN_ADAPTER      = TemperatureServiceApplication.class.getPackageName() + "infrastructure.drivenadapter.display";
+    private static final String DRIVEN_ADAPTER      = TemperatureServiceApplication.class.getPackageName() + ".infrastructure.drivenadapter";
     private static final String OUTBOUND_PORTS            = TemperatureServiceApplication.class.getPackageName() + ".domainservice";
 
 
     public static void main(String[] args)
     {
+        System.out.println(DRIVEN_ADAPTER);
+        System.out.println(OUTBOUND_PORTS);
+
         JexxaMain jexxaMain = new JexxaMain("TemperaturService");
 
         jexxaMain
@@ -25,20 +28,12 @@ public final class TemperatureServiceApplication
 
                 //Define the driving adapter that should which implementation of the outbound port should be used by Jexxa.
                 //Note: We must only register a single driven adapter for the outbound port
-                .addToInfrastructure(DISPLAY_DRIVEN_ADAPTER);
+                .addToInfrastructure(DRIVEN_ADAPTER);
 
         //Driving Adapter
         jexxaMain.bind(KafkaAdapter.class).to(TemperatureListener.class);
 
-        //The rest of main is similar to tutorial HelloJexxa
         jexxaMain
-                // Bind RESTfulRPCAdapter and JMXAdapter to TimeService class so that we can invoke its method
-               // .bind(RESTfulRPCAdapter.class).to(TemperatureService.class)
-
-                .bind(KafkaAdapter.class).to(TemperatureService.class)
-
-                //.bind(JMXAdapter.class).to(jexxaMain.getBoundedContext())
-
                 .start()
 
                 .waitForShutdown()

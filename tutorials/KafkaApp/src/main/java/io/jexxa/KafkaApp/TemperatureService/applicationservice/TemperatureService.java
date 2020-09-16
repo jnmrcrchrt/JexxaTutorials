@@ -7,13 +7,10 @@ import io.jexxa.KafkaApp.TemperatureService.domainservice.ITemperatureListener;
 public class TemperatureService
 {
 
-
-    private final ITemperatureListener iTemperatureListener;
     private final IMessageDisplay iMessageDisplay;
 
-    public TemperatureService(ITemperatureListener iTemperatureListener, IMessageDisplay iMessageDisplay)    {
+    public TemperatureService(IMessageDisplay iMessageDisplay)    {
 
-        this.iTemperatureListener = iTemperatureListener;
         this.iMessageDisplay = iMessageDisplay;
     }
 
