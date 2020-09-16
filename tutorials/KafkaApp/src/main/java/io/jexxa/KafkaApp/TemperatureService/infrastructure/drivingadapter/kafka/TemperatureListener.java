@@ -20,7 +20,7 @@ public class TemperatureListener implements  IKafkaPublishRecord
 
     @Override
     @KafkaConfiguration(topic = TOPIC)
-    public void onRecord(ConsumerRecord<String,String> record)
+    public <K, V> void onRecord(ConsumerRecord<K,V> record)
     {
             //Hier muss nur noch der Wert ankommen der aus der Topic gelesen wird
             // Forward this information to corresponding application service.

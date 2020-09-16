@@ -14,13 +14,13 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import io.jexxa.infrastructure.drivingadapter.IDrivingAdapter;
 
-public class KafkaAdapter implements IDrivingAdapter
+public class KafkaAdapter implements IDrivingAdapter 
 {
     private final List<KafkaConsumer> registeredConsumer = new ArrayList<>();
     private final List<Object> publisher = new ArrayList<>();
 
     private final Properties properties;
-    private KafkaConsumer<String, String> consumer;
+    private KafkaConsumer consumer;
 
 
     public KafkaAdapter(final Properties properties)
@@ -32,7 +32,7 @@ public class KafkaAdapter implements IDrivingAdapter
 
     private void createConsumer()
     {
-        consumer = new KafkaConsumer<String, String>(properties);
+        consumer = new KafkaConsumer(properties);
     }
 
 
@@ -60,7 +60,6 @@ public class KafkaAdapter implements IDrivingAdapter
     {
         synchronized (IDrivingAdapter.acquireLock().getSynchronizationObject())
         {
-
             while (true)
             {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
