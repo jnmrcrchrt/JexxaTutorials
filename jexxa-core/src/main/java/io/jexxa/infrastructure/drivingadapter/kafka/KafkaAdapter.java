@@ -14,47 +14,25 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import io.jexxa.infrastructure.drivingadapter.IDrivingAdapter;
 
-public class KafkaAdapter implements  IDrivingAdapter
+public class KafkaAdapter implements IDrivingAdapter
 {
-
-    public static final String BOOTSTRAP_SERVER_KEY = "io.jexxa.kafka.broker";
-    //public static final String AUTO_COMMIT = "false";   //Publizieren des Offsets
-    public static final String GROUP_ID_KEY ="io.jexxa.kafka.group";
-
-
-    public static final String KEY_DESERIALIZER = "org.apache.kafka.common.serialization.StringDeserializer";
-    public static final String VALUE_DESERIALIZER = "org.apache.kafka.common.serialization.StringDeserializer";
-
     private final List<KafkaConsumer> registeredConsumer = new ArrayList<>();
     private final List<Object> publisher = new ArrayList<>();
 
     private final Properties properties;
-    private KafkaConsumer<String,String> consumer;
-
+    private KafkaConsumer<String, String> consumer;
 
 
     public KafkaAdapter(final Properties properties)
     {
-
-        //In Properties?
-
-        //properties.put("enable.auto.commit", AUTO_COMMIT);
-
-        properties.put("bootstrap.server","localhost:9092");
-        properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        properties.put("group.id", "group");       //Wert für Client?
-
         this.properties = properties;
-
         createConsumer();
-
 
     }
 
     private void createConsumer()
     {
-        consumer = new KafkaConsumer<String,String>(properties);
+        consumer = new KafkaConsumer<String, String>(properties);
     }
 
 
@@ -62,29 +40,24 @@ public class KafkaAdapter implements  IDrivingAdapter
     public void register(Object object)
     {
 
-        //Wie dynamisch Properties zuordnen
-
         IKafkaPublishRecord kafkaPort = (IKafkaPublishRecord) (object);
-        KafkaConfiguration kafkaConfiguration  = getConfiguration(object);
+        KafkaConfiguration kafkaConfiguration = getConfiguration(object);
 
-        //properties.put("auto.offset.reset",kafkaConfiguration.receiveFrom());
-
-
+        //subscribe to topic
         consumer.subscribe(Arrays.asList(kafkaConfiguration.topic()));
 
-        Polling(kafkaPort);
-
+        //registration of consumer and publisher
         registeredConsumer.add(consumer);
         publisher.add(kafkaPort);
+
+        //polling for new records
+        Polling(kafkaPort);
 
     }
 
 
-
-
     public void Polling(IKafkaPublishRecord kafkaPort)
     {
-
         synchronized (IDrivingAdapter.acquireLock().getSynchronizationObject())
         {
 
@@ -111,7 +84,8 @@ public class KafkaAdapter implements  IDrivingAdapter
     }
 
     @Override
-    public void stop(){
+    public void stop()
+    {
 
         //close(); Schließe alle Consumer
         consumer.close();
