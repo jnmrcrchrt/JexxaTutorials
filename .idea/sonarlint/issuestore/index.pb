@@ -89,8 +89,6 @@ ptutorials/KafkaApp/src/main/java/io/jexxa/KafkaApp/TemperatureService/applicati
 htutorials/KafkaApp/src/main/java/io/jexxa/KafkaApp/TemperatureService/domainservice/IMessageDisplay.java,0\7\07d70e01bc40d1a0c349077a7d038380af1846ce
 ù
 mtutorials/KafkaApp/src/main/java/io/jexxa/KafkaApp/TemperatureService/domainservice/ITemperatureListener.java,3\b\3b28f9944054497e9903ca72cf0e7f1add146d98
-¨
-|tutorials/KafkaApp/src/main/java/io/jexxa/KafkaApp/TemperatureService/infrastructure/drivenadapter/kafka/MessageDisplay.java,8\e\8e8e9c7875ae130587ab3422a7cf46ecc7b171c9
 J
 tutorials/KafkaApp/pom.xml,0\d\0d136dc236b56245d8f3d3ccae2ba0e6f737bf90
 ´
@@ -103,3 +101,15 @@ htutorials/KafkaApp/src/main/java/io/jexxa/KafkaApp/TemperatureService/Temperatu
 Çtutorials/KafkaApp/src/main/java/io/jexxa/KafkaApp/TemperatureService/infrastructure/drivingadapter/kafka/TemperatureListener.java,3\d\3de2403917077924a405f0e37b73f9771ba2ac1c
 á
 Wjexxa-core/src/main/java/io/jexxa/infrastructure/drivingadapter/kafka/KafkaAdapter.java,b\5\b58ef298022a823d305be37c6877023ca7892797
+x
+Hjexxa-core/src/main/java/io/jexxa/core/convention/AdapterConvention.java,7\5\759a135c30af0327a34f96dd7cf051107c547284
+o
+?jexxa-core/src/main/java/io/jexxa/core/factory/PortFactory.java,b\c\bcf6da55f1d47ccae3f819d4dbe9eb1d88b22a73
+L
+tutorials/HelloJexxa/pom.xml,6\d\6dcf81c34ae061906b0e280fb86c53eb018933f7
+K
+.github/workflows/maven.yml,c\7\c709f6995f23dae0da365bff70068f8288fa89e0
+Æ
+~tutorials/KafkaApp/src/main/java/io/jexxa/KafkaApp/TemperatureService/infrastructure/drivenadapter/display/MessageDisplay.java,3\8\38a933090824df079de3bb9b4818e485918afcbe
+é
+^jexxa-core/src/main/java/io/jexxa/infrastructure/drivingadapter/kafka/IKafkaPublishRecord.java,1\6\16b95618f6ad43804e6e7874b132802303f4fbd1
